@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TriAD</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Tela de Entrada -->
+    <div class="splash-screen" id="splashScreen">
+        <img src="img/logotriad.png" alt="Logo Conexo" class="logo splash-logo" id="splashLogo">
+    </div>
+
+    <!-- Tela de Home -->
+    <div class="container" id="homeScreen" style="display: none;">
+        <img src="img/logotriad.png" alt="Logo Conexo" class="logo home-logo" id="homeLogo">
+        <p id="homeText">Forme 3 grupos de 3 palavras que tenham algo em comum</p>
+        
+        <!-- Botões organizados verticalmente -->
+        <div class="button-container">
+            <button class="button play-button" onclick="window.location.href='game.html'">Jogar</button>
+            <button class="button config-button" onclick="toggleConfigCard()">Configurações</button>
+            <button class="button feedback-button" onclick="window.location.href='mailto:seuemail@exemplo.com?subject=Feedback%20Conexo'">Feedback</button>
+            <button class="button about-button" onclick="toggleAboutCard()">Sobre</button>
+        </div>
+        
+        <!-- Card de Configurações -->
+        <div class="config-card" id="configCard">
+            <h2>Configurações</h2>
+            <label for="language">Idioma:</label>
+            <select id="language">
+                <option value="pt">Português</option>
+                <option value="en">Inglês</option>
+            </select>
+
+            <label for="sound">Som:</label>
+            <select id="sound">
+                <option value="on">Ativado</option>
+                <option value="off">Desativado</option>
+            </select>
+            
+            <button class="button close-button" onclick="toggleConfigCard()">Fechar</button>
+        </div>
+        
+        <!-- Card de Sobre -->
+        <div class="about-card" id="aboutCard">
+            <h2>Sobre</h2>
+            <p>Inspirado pelo jogo Connecting Wall do programa de TV da BBC Only Connect.</p>
+            
+            <button class="button close-button" onclick="toggleAboutCard()">Fechar</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

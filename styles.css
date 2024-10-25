@@ -1,0 +1,160 @@
+/* styles.css */
+
+/* CSS global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.container, .splash-screen {
+    text-align: center;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.splash-logo {
+    width: 150px;
+    height: auto;
+    animation: logo-animation 2s forwards;
+}
+
+.home-logo {
+    width: 100px;
+    height: auto;
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none; /* Escondido inicialmente */
+}
+
+@keyframes logo-animation {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-40vh) scale(0.67); /* Move para cima e reduz o tamanho */
+    }
+}
+
+#homeText {
+    margin-top: 150px; /* Ajuste conforme necessário */
+    margin-bottom: 20px; /* Espaçamento adicional entre o texto e os botões */
+    display: none; /* Escondido inicialmente */
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    display: none; /* Escondido inicialmente */
+}
+
+.button {
+    background-color: #1e90ff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 1em;
+    cursor: pointer;
+    margin: 10px 0;
+    text-decoration: none;
+    width: 200px;
+}
+
+.button:hover {
+    background-color: #007bff; /* Cor ao passar o mouse */
+}
+
+/* Estilo para o fundo com efeito glassmorphism */
+.background-effect {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(30, 30, 30, 0.8); /* Fundo escuro semi-transparente */
+    backdrop-filter: blur(10px); /* Efeito de desfoque */
+    z-index: 99; /* Colocado atrás dos cards */
+}
+
+/* Estilos para o card de configurações e sobre */
+.config-card,
+.about-card {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(30, 30, 30, 0.9); /* Fundo mais escuro para os cards */
+    border-radius: 15px; /* Borda arredondada */
+    padding: 20px;
+    z-index: 100; /* Colocado acima do fundo */
+    width: 300px;
+    max-width: 80%;
+    text-align: center;
+    overflow: hidden; /* Impede que o pseudo-elemento vaze do card */
+}
+
+.config-card h2,
+.about-card h2 {
+    margin-bottom: 15px;
+}
+
+.config-card label,
+.about-card label {
+    display: block;
+    margin-bottom: 10px;
+    text-align: center; /* Centraliza as labels */
+}
+
+.config-card select,
+.about-card select {
+    margin-bottom: 20px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #ffffff;
+    color: #000;
+    width: 80%; /* Para deixar o select mais centralizado */
+    margin: 0 auto; /* Centraliza o select */
+}
+
+.about-card p {
+    margin-top: 20px;
+}
+
+/* Botão de fechar padrão */
+.close-button {
+    background-color: #dc143c; /* Cor do botão de fechar */
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 20px; /* Margem superior para separar do conteúdo */
+}
+
+.close-button:hover {
+    background-color: #ff4500; /* Efeito hover para os botões de fechar */
+}

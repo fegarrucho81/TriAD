@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TriAD</title>
+    <style>
+        /* CSS global */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .top-bar {
+            width: 100%;
+            background-color: #0000001a;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px #0000001a;
+            position: relative;
+        }
+
+        .top-bar .btn {
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .top-bar .btn-help,
+        .top-bar .btn-back {
+            background-color: #007bff;
+            border: none;
+            padding: 5px;
+            border-radius: 3px;
+            color: #ffffff;
+            font-size: 1em;
+            cursor: pointer;
+            margin: 5px 0;
+        }
+
+        .top-bar .btn-help img,
+        .top-bar .btn-back img {
+            width: 24px; /* Ajuste conforme necessário */
+            height: 24px; /* Ajuste conforme necessário */
+        }
+
+        .top-bar-buttons {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .home-logo {
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+        .game-wrapper {
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            width: 90%;
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .board-wrapper {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .board-item-wrapper {
+            padding: 4px;
+            height: 90px;
+        }
+
+        .board-item {
+            align-items: center;
+            background-color: #2e2e2e;
+            border: 3px solid transparent;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            font-size: 16px;
+            height: 100%;
+            justify-content: center;
+            padding: 3px;
+            text-align: center;
+            text-transform: uppercase;
+            width: 100%;
+            position: relative;
+            transition: background-color 0.3s;
+        }
+
+        .board-item.selected {
+            background-color: #007bff;
+        }
+
+        .board-item.incorrect {
+            background-color: #ff0000;
+        }
+
+        .board-item.wrong-selection {
+            background-color: rgba(255, 166, 0, 0.926); /* Destaque para seleção errada */
+            animation: shake 0.5s; /* Adiciona a animação de tremor */
+        }
+
+        .board-item.correct {
+            grid-column: span 3; /* Ocupa o espaço de três colunas */
+            background-color: transparent; /* Para que a cor do grupo prevaleça */
+        }
+
+        .board-item.correct.red {
+            background-color: red;
+        }
+
+        .board-item.correct.blue {
+            background-color: blue;
+        }
+
+        .board-item.correct.yellow {
+            background-color: yellow;
+        }
+
+        .correct-message {
+            position: absolute;
+            top: -50px; /* Ajuste conforme necessário */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: yellow; /* Cor de fundo para a mensagem */
+            color: black; /* Cor do texto */
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        @keyframes shake {
+            0% { transform: translate(0); }
+            25% { transform: translate(-5px, 0); }
+            50% { transform: translate(5px, 0); }
+            75% { transform: translate(-5px, 0); }
+            100% { transform: translate(0); }
+        }
+
+        .button {
+            background-color: #1e90ff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #ffffff;
+            font-size: 1em;
+            cursor: pointer;
+            margin: 10px 0;
+            text-decoration: none;
+            width: 200px;
+        }
+
+        .button:hover {
+            background-color: #007bff; /* Cor ao passar o mouse */
+        }
+
+        .close-button {
+            background-color: #dc143c;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            color: #ffffff;
+            font-size: 1em;
+            cursor: pointer;
+            margin-top: 20px;
+            width: 200px;
+        }
+
+        .close-button:hover {
+            background-color: #ff4500;
+        }
+
+        .btn-help {
+            background-color: #007bff;
+            border: none;
+            padding: 5px;
+            border-radius: 3px;
+            color: #ffffff;
+            font-size: 1em;
+            cursor: pointer;
+            margin: 5px 0;
+        }
+
+        .help-card {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(30, 30, 30, 0.9);
+            border-radius: 15px;
+            padding: 20px;
+            z-index: 100;
+            width: 300px;
+            max-width: 80%;
+            text-align: center;
+        }
+
+        .help-card h2 {
+            margin-bottom: 15px;
+        }
+
+        .help-card p {
+            margin-top: 20px;
+        }
+
+        /* CSS para o card de resultados */
+        .result-card {
+            display: none; /* Oculto inicialmente */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(30, 30, 30, 0.95);
+            color: white;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000; /* Coloca o card acima de outros elementos */
+            padding: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .result-message {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .result-groups {
+            width: 100%;
+            margin-bottom: 20px;
+            display: flex; /* Adiciona display flex para organizar os grupos */
+            justify-content: space-between; /* Espaçamento entre os grupos */
+            flex-wrap: wrap; /* Permite que os grupos se movam para a linha seguinte, se necessário */
+        }
+
+        .result-group {
+            flex: 1; /* Cada grupo ocupa igual espaço */
+            margin: 5px; /* Margem entre os grupos */
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .result-group h3 {
+            margin-bottom: 5px; /* Espaço abaixo do título do grupo */
+        }
+
+        .group1 { 
+            background-color: red; 
+        }
+        
+        .group2 { 
+            background-color: blue; 
+        }
+
+        .group3 { 
+            background-color: yellow; 
+        }
+
+        .result-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <img src="img/logotriad.png" alt="Logo Conexo" class="home-logo">
+        <div class="top-bar-buttons">
+            <button type="button" class="btn-back" onclick="window.location.href='home.html'">
+                <img src="img/arrow-small-left.svg" alt="Arrow Back Icon"> <!-- Substitua o caminho pelo caminho correto do seu arquivo SVG -->
+            </button>
+            <button type="button" class="btn-help" onclick="toggleHelpCard()">
+                <img src="img/lampada.svg" alt="Help Icon"> <!-- Substitua o caminho pelo caminho correto do seu arquivo SVG -->
+            </button>
+        </div>
+    </div>
+
+    <!-- Game Wrapper -->
+    <div class="game-wrapper">
+        <div class="board-wrapper">
+            <div class="board-item-wrapper" tabindex="0" onclick="selectItem(this)">
+                <div class="board-item">amo</div>
+            </div>
+            <div class="board-item-wrapper" tabindex="0" onclick="selectItem(this)">
+                <div class="board-item">extenso</div>
+            </div>
+            <div class="board-item-wrapper" tabindex="0" onclick="selectItem(this)">
+                <div class="board-item">mestre</div>
+            </div>
+            <div class="board-item-wrapper" tabindex="0" onclick="selectItem(this)">
+                <div class="board-item">longo</div>
+            </div>
+            <div class="board-item-wrapper" tabindex="0" onclick="selectItem(this)">
+                <div class="board-item">gosto</div>
+            </div>
+            <div class="board-item-wrapper" tabindex="0" onclick="selectItem(this)">
+                <div class="board-item">curto</div>
+            </div>
+            <div class="board-item-wrapper" tabindex="0" onclick="selectItem(this)">
+                <div class="board-item">ornamento</div>
+            </div>
+            <div class="board-item-wrapper" tabindex="0" onclick="selectItem(this)">
+                <div class="board-item">adoro</div> 
+            </div>
+            <div class="board-item-wrapper" tabindex="0" onclick="selectItem(this)">
+                <div class="board-item">adereço</div>
+        </div>
+    </div>
+
+    <!-- Help Card -->
+    <div class="help-card" id="helpCard">
+        <h2>Help</h2>
+        <p>Forme 3 grupos de 3 palavras que tenham algo em comum</p>
+        <button class="button close-button" onclick="toggleHelpCard()">Fechar</button>
+    </div>
+
+    <!-- Result Card -->
+    <div class="result-card" id="resultCard">
+        <div class="result-message">
+            <h2>Parabéns!</h2>
+            <p>Você formou <span id="correctGroupCount">0</span> grupos!</p>
+        </div>
+        <div class="result-groups" id="resultGroups"></div>
+        <div class="result-buttons">
+            <button class="button" onclick="shareResult()">Compartilhar</button>
+            <button class="button close-button" onclick="closeResultCard()">Fechar</button>
+        </div>
+    </div>
+
+    <script>
+        let selectedItems = [];
+        let correctGroups = [
+            {
+                words: ['amo', 'adoro', 'gosto'],
+                description: 'Palavras que expressam amor'
+            },
+            {
+                words: ['adereço', 'ornamento', 'mestre'],
+                description: 'Termos relacionados a decoração'
+            },
+            {
+                words: ['curto', 'longo', 'extenso'],
+                description: 'Termos que descrevem tamanhos'
+            }
+        ];
+        let currentGroup = 0;
+
+        function selectItem(element) {
+            const item = element.querySelector('.board-item');
+            if (item.classList.contains('selected')) {
+                item.classList.remove('selected');
+                selectedItems = selectedItems.filter(selectedItem => selectedItem !== item);
+            } else if (selectedItems.length < 3) {
+                item.classList.add('selected');
+                selectedItems.push(item);
+            }
+
+            if (selectedItems.length === 3) {
+                checkSelection();
+            }
+        }
+
+        function checkSelection() {
+            const selectedTexts = selectedItems.map(item => item.textContent);
+
+            if (correctGroups.some(group => group.words.every(value => selectedTexts.includes(value)))) {
+                selectedItems.forEach((item, index) => {
+                    item.classList.add('correct');
+                    if (currentGroup === 0) {
+                        item.classList.add('red');
+                    } else if (currentGroup === 1) {
+                        item.classList.add('blue');
+                    } else if (currentGroup === 2) {
+                        item.classList.add('yellow');
+                    }
+                    item.classList.remove('selected');
+                });
+
+                selectedItems = []; // Limpa a seleção após formar um grupo
+                currentGroup++; // Incrementa o grupo atual
+
+                // Atualiza o card de resultados se todos os grupos forem formados
+                if (currentGroup === 3) {
+                    updateResultCard(); // Atualiza o card de resultados
+                }
+            } else {
+                selectedItems.forEach(item => {
+                    item.classList.add('wrong-selection');
+                    setTimeout(() => {
+                        item.classList.remove('wrong-selection', 'selected');
+                    }, 500);
+                });
+                selectedItems = [];
+            }
+        }
+
+        function updateResultCard() {
+            const resultCard = document.getElementById('resultCard');
+            const correctGroupCount = document.getElementById('correctGroupCount');
+            const resultGroups = document.getElementById('resultGroups');
+
+            correctGroupCount.textContent = currentGroup; // Contador de grupos formados
+            resultGroups.innerHTML = ''; // Limpa grupos anteriores
+
+            correctGroups.forEach((group, index) => {
+                const groupDiv = document.createElement('div');
+                groupDiv.classList.add('result-group', `group${index + 1}`); // Adiciona a classe para o grupo
+                groupDiv.innerHTML = `<h3>Grupo ${index + 1}: ${group.description}</h3><p>${group.words.join(', ')}</p>`;
+                resultGroups.appendChild(groupDiv);
+            });
+
+            resultCard.style.display = 'flex'; // Exibe o card de resultados
+        }
+
+        function closeResultCard() {
+            const resultCard = document.getElementById('resultCard');
+            resultCard.style.display = 'none'; // Fecha o card de resultados
+        }
+
+        function shareResult() {
+            alert('Resultado compartilhado!'); // Simulação de compartilhamento
+        }
+
+        function toggleHelpCard() {
+            const helpCard = document.getElementById('helpCard');
+            helpCard.style.display = helpCard.style.display === 'none' || helpCard.style.display === '' ? 'block' : 'none';
+        }
+    </script>
+</body>
+</html>
