@@ -14,7 +14,7 @@
 
         body {
             font-family: Arial, sans-serif;
-            background-color: #121212;
+            background-color: #202020; /* Weslley, mudei a cor de fundo */
             color: #ffffff;
             display: flex;
             flex-direction: column;
@@ -57,8 +57,8 @@
 
         .top-bar .btn-help img,
         .top-bar .btn-back img {
-            width: 24px; /* Ajuste conforme necessário */
-            height: 24px; /* Ajuste conforme necessário */
+            width: 24px; 
+            height: 24px; 
         }
 
         .top-bar-buttons {
@@ -110,6 +110,7 @@
             width: 100%;
             position: relative;
             transition: background-color 0.3s;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Sombra */
         }
 
         .board-item.selected {
@@ -122,38 +123,39 @@
 
         .board-item.wrong-selection {
             background-color: rgba(255, 166, 0, 0.926); /* Destaque para seleção errada */
-            animation: shake 0.5s; /* Adiciona a animação de tremor */
+            animation: shake 0.5s; /* Tremor */
         }
 
         .board-item.correct {
-            grid-column: span 3; /* Ocupa o espaço de três colunas */
+            grid-column: span 3; /* Três colunas */
             background-color: transparent; /* Para que a cor do grupo prevaleça */
         }
 
         .board-item.correct.red {
-            background-color: red;
+            background-color: #dc143c;
         }
 
         .board-item.correct.blue {
-            background-color: blue;
+            background-color: #4324d5; /* Azul */ 
+            ;
         }
 
         .board-item.correct.yellow {
-            background-color: yellow;
+            background-color: #fdff00;
         }
 
         .correct-message {
             position: absolute;
-            top: -50px; /* Ajuste conforme necessário */
+            top: -50px; 
             left: 50%;
             transform: translateX(-50%);
-            background-color: yellow; /* Cor de fundo para a mensagem */
-            color: black; /* Cor do texto */
+            background-color: yellow; 
+            color: black; 
             padding: 5px;
             border-radius: 5px;
         }
 
-        @keyframes shake {
+        @keyframes shake { /* Animação para tremer quando erra */
             0% { transform: translate(0); }
             25% { transform: translate(-5px, 0); }
             50% { transform: translate(5px, 0); }
@@ -162,7 +164,7 @@
         }
 
         .button {
-            background-color: #1e90ff;
+            background-color: #beb8b1;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
@@ -241,7 +243,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 1000; /* Coloca o card acima de outros elementos */
+            z-index: 1000; 
             padding: 20px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
@@ -271,15 +273,15 @@
         }
 
         .group1 { 
-            background-color: red; 
+            background-color: #dc143c; /* Vermelho */ 
         }
         
         .group2 { 
-            background-color: blue; 
+            background-color: #21387a; /* Azul */ 
         }
 
         .group3 { 
-            background-color: yellow; 
+            background-color: #fbd752; /* Amarelo */ 
         }
 
         .result-buttons {
@@ -288,6 +290,11 @@
             align-items: center;
             width: 100%;
         }
+
+        .grupo1, .grupo2, .grupo3, .grupo4 {
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Sombra suave e discreta */
+        }
+
     </style>
 </head>
 <body>
@@ -295,15 +302,15 @@
         <img src="img/logotriad.png" alt="Logo Conexo" class="home-logo">
         <div class="top-bar-buttons">
             <button type="button" class="btn-back" onclick="window.location.href='home.html'">
-                <img src="img/arrow-small-left.svg" alt="Arrow Back Icon"> <!-- Substitua o caminho pelo caminho correto do seu arquivo SVG -->
+                <img src="img/arrow-small-left.svg" alt="Arrow Back Icon"> 
             </button>
             <button type="button" class="btn-help" onclick="toggleHelpCard()">
-                <img src="img/lampada.svg" alt="Help Icon"> <!-- Substitua o caminho pelo caminho correto do seu arquivo SVG -->
+                <img src="img/lampada.svg" alt="Help Icon"> 
             </button>
         </div>
     </div>
 
-    <!-- Game Wrapper -->
+   
     <div class="game-wrapper">
         <div class="board-wrapper">
             <div class="board-item-wrapper" tabindex="0" onclick="selectItem(this)">
