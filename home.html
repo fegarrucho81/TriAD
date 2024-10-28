@@ -1,3 +1,4 @@
+<!-- Atualização no HTML -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -19,36 +20,36 @@
         
         <!-- Botões organizados verticalmente -->
         <div class="button-container">
-            <button class="button play-button" onclick="window.location.href='game.html'">Jogar</button>
-            <button class="button config-button" onclick="toggleConfigCard()">Configurações</button>
-            <button class="button feedback-button" onclick="window.location.href='mailto:seuemail@exemplo.com?subject=Feedback%20Conexo'">Feedback</button>
-            <button class="button about-button" onclick="toggleAboutCard()">Sobre</button>
+            <button class="button play-button" onclick="window.location.href='game.html'" id="playButton">Jogar</button>
+            <button class="button config-button" onclick="toggleConfigCard()" id="configButton">Configurações</button>
+            <button class="button feedback-button" onclick="window.location.href='mailto:seuemail@exemplo.com?subject=Feedback%20Conexo'" id="feedbackButton">Feedback</button>
+            <button class="button about-button" onclick="toggleAboutCard()" id="aboutButton">Sobre</button>
         </div>
         
         <!-- Card de Configurações -->
         <div class="config-card" id="configCard">
-            <h2>Configurações</h2>
-            <label for="language">Idioma:</label>
-            <select id="language">
+            <h2 id="configTitle">Configurações</h2>
+            <label for="language" id="languageLabel">Idioma:</label>
+            <select id="language" onchange="changeLanguage()">
                 <option value="pt">Português</option>
                 <option value="en">Inglês</option>
             </select>
 
-            <label for="sound">Som:</label>
+            <label for="sound" id="soundLabel">Som:</label>
             <select id="sound">
                 <option value="on">Ativado</option>
                 <option value="off">Desativado</option>
             </select>
             
-            <button class="button close-button" onclick="toggleConfigCard()">Fechar</button>
+            <button class="button close-button" onclick="toggleConfigCard()" id="closeConfigButton">Fechar</button>
         </div>
         
         <!-- Card de Sobre -->
         <div class="about-card" id="aboutCard">
-            <h2>Sobre</h2>
-            <p>Inspirado pelo jogo Connecting Wall do programa de TV da BBC Only Connect.</p>
+            <h2 id="aboutTitle">Sobre</h2>
+            <p id="aboutText">Inspirado pelo jogo Connecting Wall do programa de TV da BBC Only Connect.</p>
             
-            <button class="button close-button" onclick="toggleAboutCard()">Fechar</button>
+            <button class="button close-button" onclick="toggleAboutCard()" id="closeAboutButton">Fechar</button>
         </div>
     </div>
 
