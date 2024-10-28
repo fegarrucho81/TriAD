@@ -351,9 +351,11 @@
         <div class="result-groups" id="resultGroups"></div>
         <div class="result-buttons">
             <button class="button" onclick="shareResult()">Compartilhar</button>
+            <button class="button" id="playAgainButton" onclick="resetGame()">Jogar Novamente</button> <!-- Novo botão-->
             <button class="button close-button" onclick="closeResultCard()">Fechar</button>
         </div>
     </div>
+    
 
     <script>
         let selectedItems = [];
@@ -453,6 +455,37 @@
             const helpCard = document.getElementById('helpCard');
             helpCard.style.display = helpCard.style.display === 'none' || helpCard.style.display === '' ? 'block' : 'none';
         }
+
+        
+        function resetGame() {
+        // Limpar a seleção
+        selectedItems.forEach(item => item.classList.remove('selected'));
+        selectedItems = [];
+        currentGroup = 0; // Resetar o grupo atual
+        document.getElementById('correctGroupCount').textContent = '0'; // Reiniciar contagem de grupos corretos
+        document.getElementById('resultGroups').innerHTML = ''; // Limpar os grupos de resultados
+
+        // Ocultar o card de resultados
+        document.getElementById('resultCard').style.display = 'none';
+        
+        // Mostrar os itens do tabuleiro novamente
+        const boardItems = document.querySelectorAll('.board-item');
+        boardItems.forEach(item => {
+            item.classList.remove('correct', 'red', 'blue', 'yellow'); // Limpar classes de correção
+        });
+        
+        // Reexibir o tabuleiro de jogo
+        document.querySelector('.game-wrapper').style.display = 'block';
+    }
+
+    // Atualizar a função closeResultCard para ocultar também o tabuleiro de jogo
+    function closeResultCard() {
+        document.getElementById('resultCard').style.display = 'none';
+        document.querySelector('.game-wrapper').style.display = 'block'; // Reexibir o tabuleiro ao fechar o card de resultados
+    }
+
+
+        
     </script>
 </body>
 </html>
