@@ -9,7 +9,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #121212;
+    background-color: #202020; /* Weslley, mudei a cor de fundo */
     color: #ffffff;
     display: flex;
     justify-content: center;
@@ -55,9 +55,9 @@ body {
 }
 
 #homeText {
-    margin-top: 150px; /* Ajuste conforme necessário */
+    margin-top: 150px; 
     margin-bottom: 20px; /* Espaçamento adicional entre o texto e os botões */
-    display: none; /* Escondido inicialmente */
+    display: none; 
 }
 
 .button-container {
@@ -68,7 +68,7 @@ body {
 }
 
 .button {
-    background-color: #1e90ff;
+    background-color: #1e90ff;;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -157,4 +157,30 @@ body {
 
 .close-button:hover {
     background-color: #ff4500; /* Efeito hover para os botões de fechar */
+}
+
+.btn-back:hover,
+.btn-help:hover {
+    background-color: #0056b3; /* Cor levemente mais escura */
+}
+
+.result-group {
+    flex: 0 0 48%; /* Ocupa metade da linha em telas pequenas */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+@media (max-width: 600px) {
+    .result-group {
+        flex: 0 0 100%; /* Ocupa a linha inteira em telas menores */
+    }
+}
+
+/* Opcional: bordas e transição suave */
+.grupo1, .grupo2, .grupo3, .grupo4 {
+    border-radius: 8px;
+    padding: 10px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.grupo1:hover, .grupo2:hover, .grupo3:hover, .grupo4:hover {
+    transform: scale(1.05); /* Leve zoom ao passar o mouse */
 }
