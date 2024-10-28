@@ -21,3 +21,54 @@ function toggleConfigCard() {
     }
 }
 
+window.addEventListener("load", function () {
+    setTimeout(function () {
+        document.getElementById("splashScreen").style.display = "none";
+        document.getElementById("homeScreen").style.display = "block";
+    }, 2000); // Ajuste o tempo, em milissegundos
+});
+
+function endGame() {
+    // Adiciona um delay de 500ms antes de exibir a tela final
+    setTimeout(() => {
+      showFinalScreen(); // Função que exibe a tela final
+    }, 500);
+  }
+  
+  function showFinalScreen() {
+    // Lógica para exibir a tela final
+    document.getElementById("final-screen").style.display = "block";
+  }
+  
+// Função para alternar o idioma
+function changeLanguage() {
+    const language = document.getElementById('language').value;
+
+    if (language === 'en') {
+        document.getElementById('homeText').innerText = "Form 3 groups of 3 words that have something in common";
+        document.getElementById('playButton').innerText = "Play";
+        document.getElementById('configButton').innerText = "Settings";
+        document.getElementById('feedbackButton').innerText = "Feedback";
+        document.getElementById('aboutButton').innerText = "About";
+        document.getElementById('configTitle').innerText = "Settings";
+        document.getElementById('languageLabel').innerText = "Language:";
+        document.getElementById('soundLabel').innerText = "Sound:";
+        document.getElementById('closeConfigButton').innerText = "Close";
+        document.getElementById('aboutTitle').innerText = "About";
+        document.getElementById('aboutText').innerText = "Inspired by the BBC TV show Only Connect's Connecting Wall game.";
+        document.getElementById('closeAboutButton').innerText = "Close";
+    } else {
+        document.getElementById('homeText').innerText = "Forme 3 grupos de 3 palavras que tenham algo em comum";
+        document.getElementById('playButton').innerText = "Jogar";
+        document.getElementById('configButton').innerText = "Configurações";
+        document.getElementById('feedbackButton').innerText = "Feedback";
+        document.getElementById('aboutButton').innerText = "Sobre";
+        document.getElementById('configTitle').innerText = "Configurações";
+        document.getElementById('languageLabel').innerText = "Idioma:";
+        document.getElementById('soundLabel').innerText = "Som:";
+        document.getElementById('closeConfigButton').innerText = "Fechar";
+        document.getElementById('aboutTitle').innerText = "Sobre";
+        document.getElementById('aboutText').innerText = "Inspirado pelo jogo Connecting Wall do programa de TV da BBC Only Connect.";
+        document.getElementById('closeAboutButton').innerText = "Fechar";
+    }
+}
