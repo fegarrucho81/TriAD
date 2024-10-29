@@ -77,6 +77,7 @@ function checkSelection() {
 }
 
 function updateResultCard() {
+    const overlay = document.getElementById('overlay');
     const resultCard = document.getElementById('resultCard');
     const correctGroupCount = document.getElementById('correctGroupCount');
     const resultGroups = document.getElementById('resultGroups');
@@ -91,16 +92,19 @@ function updateResultCard() {
         resultGroups.appendChild(groupDiv);
     });
 
-
     setTimeout(() => {
-        resultCard.style.display = 'flex'; // Delay para aparecer a tela de resultado
+        overlay.style.display = 'block'; // Exibe o fundo escurecido
+        resultCard.style.display = 'flex'; // Exibe a tela de resultado
     }, 1000);
+
 
 }
 
 function closeResultCard() {
+    const overlay = document.getElementById('overlay');
     const resultCard = document.getElementById('resultCard');
-    resultCard.style.display = 'none'; // Fecha o card de resultados
+    overlay.style.display = 'none'; // Oculta o fundo escurecido
+    resultCard.style.display = 'none'; // Fecha o card de resultado
 }
 
 function shareResult() {
@@ -114,30 +118,24 @@ function toggleHelpCard() {
 
 
 function resetGame() {
-    // Limpar a seleção
-    clearInterval(timerInterval); // Para o timer anterior
-    startTimer(); // Inicia um novo timer
+    const overlay = document.getElementById('overlay');
+    overlay.style.display = 'none'; // Oculta o fundo escurecido
+
+    // Restante do código de reset...
+    clearInterval(timerInterval);
+    startTimer();
     selectedItems.forEach(item => item.classList.remove('selected'));
     selectedItems = [];
-    currentGroup = 0; // Resetar o grupo atual
-    attemptCount = 0; // Resetar tentativas
-
-    // Reiniciar contagem de tentativas e atualizar a exibição
-    document.getElementById('attemptCounter').textContent = 'Erros: 0 / 5'; // Reiniciar o contador de tentativas
-
-    document.getElementById('correctGroupCount').textContent = '0'; // Reiniciar contagem de grupos corretos
-    document.getElementById('resultGroups').innerHTML = ''; // Limpar os grupos de resultados
-
-    // Ocultar o card de resultados
+    currentGroup = 0;
+    attemptCount = 0;
+    document.getElementById('attemptCounter').textContent = 'Erros: 0 / 5';
+    document.getElementById('correctGroupCount').textContent = '0';
+    document.getElementById('resultGroups').innerHTML = '';
     document.getElementById('resultCard').style.display = 'none';
 
-    // Mostrar os itens do tabuleiro novamente
     const boardItems = document.querySelectorAll('.board-item');
-    boardItems.forEach(item => {
-        item.classList.remove('correct', 'red', 'blue', 'yellow'); // Limpar classes de correção
-    });
+    boardItems.forEach(item => item.classList.remove('correct', 'red', 'blue', 'yellow'));
 
-    // Reexibir o tabuleiro de jogo
     document.querySelector('.game-wrapper').style.display = 'block';
 }
 
@@ -145,11 +143,10 @@ function resetGame() {
 function closeResultCard() {
     document.getElementById('resultCard').style.display = 'none';
     document.querySelector('.game-wrapper').style.display = 'block'; // Reexibir o tabuleiro ao fechar o card de resultados
+    
 }
 
-// Variáveis globais
-let startTime; // Para armazenar o tempo de início
-let timerInterval; // Para armazenar o intervalo do timer
+
 
 /*
 
@@ -160,7 +157,14 @@ O TIMER
 
 */
 
+
+
 // Iniciar o timer
+
+// Variáveis globais
+let startTime; // Para armazenar o tempo de início
+let timerInterval; // Para armazenar o intervalo do timer
+
 function startTimer() {
     startTime = Date.now(); // Captura o tempo de início
     timerInterval = setInterval(updateTimer, 1000); // Atualiza a cada segundo
