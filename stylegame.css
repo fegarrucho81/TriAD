@@ -245,22 +245,25 @@ body {
     margin-bottom: 20px;
 }
 
-.result-groups {
-    width: 100%;
-    margin-bottom: 20px;
-    display: flex; /* Adiciona display flex para organizar os grupos */
-    justify-content: space-between; /* Espaçamento entre os grupos */
-    flex-wrap: wrap; /* Permite que os grupos se movam para a linha seguinte, se necessário */
+
+
+.result-group {
+    flex: 1; /* Mantém a mesma largura para os grupos */
+    margin: 10px 0; /* Espaçamento vertical entre os grupos */
+    padding: 10px; /* Diminui o preenchimento interno */
+    border-radius: 10px; /* Borda arredondada */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    width: 100%; /* Mantém a largura total */
+    max-height: 100px; /* Limita a altura máxima para não expandir muito */
+    overflow: hidden; /* Garante que o conteúdo não expanda o balão */
 }
 
 .result-groups {
-    width: 100%;
-    margin-bottom: 20px;
-    display: flex; /* Mantém o display flex */
-    flex-direction: column; /* Muda para coluna para empilhar os grupos verticalmente */
-    align-items: center; /* Centraliza os itens */
-    gap: 10px; /* Espaçamento entre os grupos */
+    display: flex; /* Mantém o layout flexível */
+    flex-direction: column; /* Mantém os grupos em coluna */
+    align-items: stretch; /* Faz com que todos os grupos ocupem a mesma largura */
 }
+
 
 .result-group h3 {
     margin-bottom: 5px; /* Espaço abaixo do título do grupo */
