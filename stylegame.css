@@ -301,3 +301,9 @@ body {
     justify-content: center; /* Centraliza o conteúdo horizontalmente */
     width: 100%; /* Garante que ocupe toda a largura */
 }
+
+.timer {
+    font-size: 20px; /* Ajuste o tamanho conforme necessário */
+    margin: 10px 0; /* Adicione um espaço ao redor */
+    text-align: center; /* Centraliza o texto */
+}
