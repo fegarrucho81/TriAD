@@ -253,11 +253,13 @@ body {
     flex-wrap: wrap; /* Permite que os grupos se movam para a linha seguinte, se necessário */
 }
 
-.result-group {
-    flex: 1; /* Cada grupo ocupa igual espaço */
-    margin: 5px; /* Margem entre os grupos */
-    padding: 10px;
-    border-radius: 8px;
+.result-groups {
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex; /* Mantém o display flex */
+    flex-direction: column; /* Muda para coluna para empilhar os grupos verticalmente */
+    align-items: center; /* Centraliza os itens */
+    gap: 10px; /* Espaçamento entre os grupos */
 }
 
 .result-group h3 {
@@ -285,4 +287,14 @@ body {
 
 .grupo1, .grupo2, .grupo3, .grupo4 {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2); /* Sombra suave e discreta */
+}
+
+.attempt-counter {
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center; /* Centraliza o texto horizontalmente */
+    display: flex; /* Usar flexbox */
+    justify-content: center; /* Centraliza o conteúdo horizontalmente */
+    width: 100%; /* Garante que ocupe toda a largura */
 }
