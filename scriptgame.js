@@ -101,14 +101,33 @@ function updateResultCard() {
 }
 
 function closeResultCard() {
-    const overlay = document.getElementById('overlay');
-    const resultCard = document.getElementById('resultCard');
-    overlay.style.display = 'none'; // Oculta o fundo escurecido
-    resultCard.style.display = 'none'; // Fecha o card de resultado
-}
+    // Pausar o contador
+    clearInterval(timerInterval); 
 
+    // Remover a exibição da tela de vitória e do fundo escurecido
+    document.getElementById('resultCard').style.display = 'none';
+    document.getElementById('overlay').style.display = 'none';
+
+    // O tabuleiro de jogo permanece como está, não precisa ser escondido ou reexibido
+}
 function shareResult() {
-    alert('Resultado compartilhado!'); // Simulação de compartilhamento
+    // Data atual formatada
+    const today = new Date();
+    const date = today.toLocaleDateString('pt-BR'); // Formato "dia/mês/ano"
+
+    // Número de tentativas e tempo do cronômetro
+    const attempts = attemptCount;
+    const elapsedTime = document.getElementById('timer').textContent; // Pega o tempo exibido no cronômetro
+
+    // Mensagem de compartilhamento
+    const shareMessage = `Eu venci o Triad no dia ${date} em ${attempts} tentativas e em ${elapsedTime}.`;
+
+    // Copia para a área de transferência
+    navigator.clipboard.writeText(shareMessage).then(() => {
+        alert('Resultado copiado para a área de transferência!');
+    }).catch(err => {
+        console.error('Erro ao copiar para a área de transferência: ', err);
+    });
 }
 
 function toggleHelpCard() {
@@ -139,12 +158,7 @@ function resetGame() {
     document.querySelector('.game-wrapper').style.display = 'block';
 }
 
-// Atualizar a função closeResultCard para ocultar também o tabuleiro de jogo
-function closeResultCard() {
-    document.getElementById('resultCard').style.display = 'none';
-    document.querySelector('.game-wrapper').style.display = 'block'; // Reexibir o tabuleiro ao fechar o card de resultados
-    
-}
+
 
 
 
