@@ -1,4 +1,4 @@
-let selectedItems = [];
+        let selectedItems = [];
         let correctGroups = [
             {
                 words: ['amo', 'adoro', 'gosto'],
@@ -13,7 +13,10 @@ let selectedItems = [];
                 description: 'Termos que descrevem tamanhos'
             }
         ];
+
         let currentGroup = 0;
+        let attemptCount = 0; // Contador de tentativas
+        let maxAttempts = 5;  // Limite de tentativas
 
         function selectItem(element) {
             const item = element.querySelector('.board-item');
@@ -32,8 +35,9 @@ let selectedItems = [];
 
         function checkSelection() {
             const selectedTexts = selectedItems.map(item => item.textContent);
-
+        
             if (correctGroups.some(group => group.words.every(value => selectedTexts.includes(value)))) {
+                // Lógica para grupo correto
                 selectedItems.forEach((item, index) => {
                     item.classList.add('correct');
                     if (currentGroup === 0) {
@@ -45,22 +49,31 @@ let selectedItems = [];
                     }
                     item.classList.remove('selected');
                 });
-
-                selectedItems = []; // Limpa a seleção após formar um grupo
-                currentGroup++; // Incrementa o grupo atual
-
-                // Atualiza o card de resultados se todos os grupos forem formados
+        
+                selectedItems = [];
+                currentGroup++;
+        
                 if (currentGroup === 3) {
-                    updateResultCard(); // Atualiza o card de resultados
+                    updateResultCard();
                 }
             } else {
-                selectedItems.forEach(item => {
-                    item.classList.add('wrong-selection');
-                    setTimeout(() => {
-                        item.classList.remove('wrong-selection', 'selected');
-                    }, 500);
-                });
-                selectedItems = [];
+                // Lógica para seleção errada
+                attemptCount++; // Incrementa o contador de tentativas
+                document.getElementById('attemptCounter').textContent = `Tentativas: ${attemptCount} / ${maxAttempts}`; // Atualiza o contador
+        
+                if (attemptCount >= maxAttempts) {
+                    alert('Você atingiu o número máximo de tentativas!'); // Notifica o usuário
+                    // Aqui você pode decidir se deseja reiniciar o jogo ou encerrar
+                    resetGame(); // Reiniciar o jogo, por exemplo
+                } else {
+                    selectedItems.forEach(item => {
+                        item.classList.add('wrong-selection');
+                        setTimeout(() => {
+                            item.classList.remove('wrong-selection', 'selected');
+                        }, 500);
+                    });
+                    selectedItems = [];
+                }
             }
         }
 
@@ -116,10 +129,15 @@ let selectedItems = [];
         
         // Reexibir o tabuleiro de jogo
         document.querySelector('.game-wrapper').style.display = 'block';
-    }
+        }
 
-    // Atualizar a função closeResultCard para ocultar também o tabuleiro de jogo
-    function closeResultCard() {
-        document.getElementById('resultCard').style.display = 'none';
-        document.querySelector('.game-wrapper').style.display = 'block'; // Reexibir o tabuleiro ao fechar o card de resultados
-    }
+        // Atualizar a função closeResultCard para ocultar também o tabuleiro de jogo
+        function closeResultCard() {
+            document.getElementById('resultCard').style.display = 'none';
+            document.querySelector('.game-wrapper').style.display = 'block'; // Reexibir o tabuleiro ao fechar o card de resultados
+        }
+
+        
+
+        
+
