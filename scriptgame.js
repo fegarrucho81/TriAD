@@ -88,7 +88,7 @@ function updateResultCard() {
     correctGroups.forEach((group, index) => {
         const groupDiv = document.createElement('div');
         groupDiv.classList.add('result-group', `group${index + 1}`); // Adiciona a classe para o grupo
-        groupDiv.innerHTML = `<h3>Grupo ${index + 1}: ${group.description}</h3><p>${group.words.join(', ')}</p>`;
+        groupDiv.innerHTML = `<h3>${group.description}</h3><p>${group.words.join(', ')}</p>`;
         resultGroups.appendChild(groupDiv);
     });
 
