@@ -62,9 +62,8 @@ function checkSelection() {
         document.getElementById('attemptCounter').textContent = `Erros: ${attemptCount} / ${maxAttempts}`; // Atualiza o contador
 
         if (attemptCount >= maxAttempts) {
-            alert('Você atingiu o número máximo de tentativas!'); // Notifica o usuário
-            // Aqui você pode decidir se deseja reiniciar o jogo ou encerrar
-            resetGame(); // Reiniciar o jogo, por exemplo
+            alert('Você atingiu o número máximo de tentativas!'); 
+            resetGame(); 
         } else {
             selectedItems.forEach(item => {
                 item.classList.add('wrong-selection');
@@ -116,6 +115,8 @@ function toggleHelpCard() {
 
 function resetGame() {
     // Limpar a seleção
+    clearInterval(timerInterval); // Para o timer anterior
+    startTimer(); // Inicia um novo timer
     selectedItems.forEach(item => item.classList.remove('selected'));
     selectedItems = [];
     currentGroup = 0; // Resetar o grupo atual
@@ -145,3 +146,37 @@ function closeResultCard() {
     document.getElementById('resultCard').style.display = 'none';
     document.querySelector('.game-wrapper').style.display = 'block'; // Reexibir o tabuleiro ao fechar o card de resultados
 }
+
+// Variáveis globais
+let startTime; // Para armazenar o tempo de início
+let timerInterval; // Para armazenar o intervalo do timer
+
+/*
+
+
+TUDO DAQUI PRA BAIXO É 
+O TIMER
+
+
+*/
+
+// Iniciar o timer
+function startTimer() {
+    startTime = Date.now(); // Captura o tempo de início
+    timerInterval = setInterval(updateTimer, 1000); // Atualiza a cada segundo
+}
+
+// Atualizar o timer
+function updateTimer() {
+    const elapsedTime = Math.floor((Date.now() - startTime) / 1000); // Calcula o tempo decorrido em segundos
+    const minutes = Math.floor(elapsedTime / 60); // Calcula os minutos
+    const seconds = elapsedTime % 60; // Calcula os segundos restantes
+
+    // Formata os minutos e segundos
+    document.getElementById('timer').textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`; 
+}
+
+// Inicia o timer quando a página é carregada
+window.onload = function() {
+    startTimer(); // Inicia o timer ao carregar a página
+};
