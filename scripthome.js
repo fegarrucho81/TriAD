@@ -72,3 +72,12 @@ function changeLanguage() {
         document.getElementById('sound').options[1].text = "Desativado";
     }
 }
+
+function toggleAboutCard() {
+    var aboutCard = document.getElementById('aboutCard');
+    if (aboutCard.style.display === 'none' || aboutCard.style.display === '') {
+        aboutCard.style.display = 'block';
+    } else {
+        aboutCard.style.display = 'none';
+    }
+}
