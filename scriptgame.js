@@ -120,7 +120,7 @@ function shareResult() {
     const elapsedTime = document.getElementById('timer').textContent; // Pega o tempo exibido no cronômetro
 
     // Mensagem de compartilhamento
-    const shareMessage = `Eu venci o Triad no dia ${date} em ${attempts} tentativas e em ${elapsedTime}.`;
+    const shareMessage = `Eu venci o Triad no dia ${date} com ${attempts} tentativas e em ${elapsedTime}. Me diverti muito!  🥳🥳`;
 
     // Copia para a área de transferência
     navigator.clipboard.writeText(shareMessage).then(() => {
