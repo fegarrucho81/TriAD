@@ -128,7 +128,7 @@ body {
 }
 
 .board-item.correct.blue {
-    background-color: #4324d5; /* Azul */ 
+    background-color: #36c3ff; /* Azul */ 
     ;
 }
 
@@ -277,7 +277,7 @@ body {
 }
 
 .group2 { 
-    background-color: #21387a; /* Azul */ 
+    background-color: #36c3ff; /* Azul */ 
 }
 
 .group3 { 
