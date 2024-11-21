@@ -184,3 +184,11 @@ body {
 .grupo1:hover, .grupo2:hover, .grupo3:hover, .grupo4:hover {
     transform: scale(1.05); /* Leve zoom ao passar o mouse */
 }
+
+.home-logo {
+    margin-top: 30px; /* Aumente o valor conforme necessário */
+}
+
+.splash-logo {
+    margin-top: 30px; /* Aumente o valor conforme necessário */
+}
