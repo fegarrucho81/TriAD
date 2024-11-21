@@ -228,7 +228,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: rgba(30, 30, 30, 0.95);
+    background-color: #1e1e1ef2;
     color: white;
     position: fixed;
     top: 50%;
@@ -321,4 +321,61 @@ body {
     background-color: rgba(0, 0, 0, 0.7); /* Escurecimento semi-transparente */
     z-index: 99; /* Um índice menor que o da tela de vitória */
     display: none; /* Oculto por padrão */
+}
+
+/* Estilo para a mensagem de compartilhamento */
+.share-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #1e1e1ef2;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+    text-align: center;
+}
+
+.share-message p {
+    margin: 0 0 10px;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+/* Estilo para o fundo escurecido */
+#shareOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+}
+
+.result-card, 
+.result-message, 
+.result-group h3, 
+.attempt-counter, 
+.timer, 
+.share-message p {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra leve */
+}
+
+/* Estilo base para os botões */
+.btn-back, .btn-help {
+    background-color: transparent; /* Fundo transparente por padrão */
+    border: none; /* Remove a borda */
+    padding: 10px;
+    cursor: pointer; /* Mostra o ícone de clique */
+    transition: transform 0.2s ease, background-color 0.2s ease; /* Suaviza a transição */
+}
+
+/* Estilo hover */
+.btn-back:hover, .btn-help:hover {
+    transform: scale(1.1); /* Aumenta ligeiramente o botão */
+    background-color: #007bff; /* Adiciona um fundo translúcido */
+    border-radius: 50%; /* Deixa o botão arredondado ao passar o mouse */
 }
