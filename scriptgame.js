@@ -110,6 +110,7 @@ function closeResultCard() {
 
     // O tabuleiro de jogo permanece como está, não precisa ser escondido ou reexibido
 }
+
 function shareResult() {
     // Data atual formatada
     const today = new Date();
@@ -120,14 +121,22 @@ function shareResult() {
     const elapsedTime = document.getElementById('timer').textContent; // Pega o tempo exibido no cronômetro
 
     // Mensagem de compartilhamento
-    const shareMessage = `Eu venci o Triad no dia ${date} com ${attempts} tentativas e em ${elapsedTime}. Me diverti muito!  🥳🥳`;
+    const shareMessage = `Eu venci o Triad no dia ${date} com ${attempts} tentativas e em ${elapsedTime}. Me diverti muito! 🥳🥳`;
 
     // Copia para a área de transferência
     navigator.clipboard.writeText(shareMessage).then(() => {
-        alert('Resultado copiado para a área de transferência!');
+        // Exibe a mensagem de compartilhamento
+        document.getElementById('shareMessage').style.display = 'block';
+        document.getElementById('shareOverlay').style.display = 'block';
     }).catch(err => {
         console.error('Erro ao copiar para a área de transferência: ', err);
     });
+}
+
+function closeShareMessage() {
+    // Fecha a mensagem de compartilhamento
+    document.getElementById('shareMessage').style.display = 'none';
+    document.getElementById('shareOverlay').style.display = 'none';
 }
 
 function toggleHelpCard() {
