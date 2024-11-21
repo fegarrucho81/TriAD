@@ -393,3 +393,7 @@ body {
 .top-bar-buttons {
     margin-top: 20px; /* Ajuste conforme necessário */
 }
+
+#backgroundMusic {
+    display: none;
+}
