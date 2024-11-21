@@ -88,6 +88,8 @@ function showDefeatScreen() {
     const correctGroupCount = document.getElementById('correctGroupCount');
     const resultGroups = document.getElementById('resultGroups');
 
+    clearInterval(timerInterval); // Para o cronômetro
+
     // Atualiza a mensagem para "Você perdeu"
     correctGroupCount.textContent = attemptCount; // Mostra o número de tentativas
     resultGroups.innerHTML = ''; // Limpa grupos anteriores
@@ -126,6 +128,8 @@ function updateResultCard() {
     const correctGroupCount = document.getElementById('correctGroupCount');
     const resultGroups = document.getElementById('resultGroups');
 
+    clearInterval(timerInterval); // Para o cronômetro
+
     correctGroupCount.textContent = currentGroup; // Contador de grupos formados
     resultGroups.innerHTML = ''; // Limpa grupos anteriores
 
@@ -140,8 +144,6 @@ function updateResultCard() {
         overlay.style.display = 'block'; // Exibe o fundo escurecido
         resultCard.style.display = 'flex'; // Exibe a tela de resultado
     }, 1000);
-
-
 }
 
 function closeResultCard() {
