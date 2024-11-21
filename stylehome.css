@@ -192,3 +192,7 @@ body {
 .splash-logo {
     margin-top: 30px; /* Aumente o valor conforme necessário */
 }
+
+#backgroundMusic {
+    display: none;
+}
