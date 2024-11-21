@@ -69,8 +69,7 @@ function checkSelection() {
         document.getElementById('attemptCounter').textContent = `Erros: ${attemptCount} / ${maxAttempts}`; // Atualiza o contador
 
         if (attemptCount >= maxAttempts) {
-            alert('Você atingiu o número máximo de tentativas!'); 
-            resetGame(); 
+            showDefeatScreen(); // Mostra tela de derrota
         } else {
             selectedItems.forEach(item => {
                 item.classList.add('wrong-selection');
@@ -82,6 +81,44 @@ function checkSelection() {
         }
     }
 }
+
+function showDefeatScreen() {
+    const overlay = document.getElementById('overlay');
+    const resultCard = document.getElementById('resultCard');
+    const correctGroupCount = document.getElementById('correctGroupCount');
+    const resultGroups = document.getElementById('resultGroups');
+
+    // Atualiza a mensagem para "Você perdeu"
+    correctGroupCount.textContent = attemptCount; // Mostra o número de tentativas
+    resultGroups.innerHTML = ''; // Limpa grupos anteriores
+
+    // Adiciona a mensagem de derrota
+    const resultMessage = document.createElement('div');
+    resultMessage.classList.add('result-message');
+    resultMessage.innerHTML = `
+        <h2>Perdeu!</h2>
+        <p>Você excedeu o número de tentativas!</p>
+    `;
+    resultCard.innerHTML = ''; // Limpa qualquer conteúdo anterior do card
+    resultCard.appendChild(resultMessage);
+
+    // Adiciona os botões de "Jogar Novamente" e "Fechar"
+    const resultButtons = document.createElement('div');
+    resultButtons.classList.add('result-buttons');
+    resultButtons.innerHTML = `
+        <button class="button" onclick="resetGame()">Jogar Novamente</button>
+        <button class="button close-button" onclick="closeResultCard()">Fechar</button>
+    `;
+    resultCard.appendChild(resultButtons);
+
+    // Exibe a tela de derrota
+    setTimeout(() => {
+        overlay.style.display = 'block'; // Exibe o fundo escurecido
+        resultCard.style.display = 'flex'; // Exibe a tela de derrota
+    }, 1000);
+}
+
+
 
 function updateResultCard() {
     const overlay = document.getElementById('overlay');
@@ -154,13 +191,16 @@ function toggleHelpCard() {
 
 function resetGame() {
     const overlay = document.getElementById('overlay');
-    overlay.style.display = 'none'; // Oculta o fundo escurecido
+    const resultCard = document.getElementById('resultCard');
+    
+    // Esconde a tela de derrota e o fundo escurecido
+    overlay.style.display = 'none';
+    resultCard.style.display = 'none';
 
     // Adicione a linha abaixo para esconder a mensagem de compartilhamento e o overlay
     document.getElementById('shareMessage').style.display = 'none';
     document.getElementById('shareOverlay').style.display = 'none';
 
-    // Restante do código de reset...
     clearInterval(timerInterval);
     startTimer();
     selectedItems.forEach(item => item.classList.remove('selected'));
@@ -215,3 +255,4 @@ function updateTimer() {
 window.onload = function() {
     startTimer(); // Inicia o timer ao carregar a página
 };
+
