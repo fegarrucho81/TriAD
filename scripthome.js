@@ -81,3 +81,43 @@ function toggleAboutCard() {
         aboutCard.style.display = 'none';
     }
 }
+
+// ID do elemento de áudio
+const audioElement = document.getElementById('backgroundMusic');
+
+// Função para iniciar a música
+function startMusic() {
+    const savedTime = localStorage.getItem('musicTime') || 0; // Recupera o tempo salvo
+    audioElement.currentTime = savedTime; // Define o tempo inicial
+    audioElement.play().catch(console.error); // Tenta iniciar a reprodução
+}
+
+// Função para pausar e salvar o tempo atual
+function saveMusicTime() {
+    localStorage.setItem('musicTime', audioElement.currentTime); // Salva o tempo atual
+}
+
+// Inicia a música ao carregar a página
+document.addEventListener('DOMContentLoaded', () => {
+    startMusic();
+});
+
+// Salva o tempo quando a página é descarregada
+window.addEventListener('beforeunload', () => {
+    saveMusicTime();
+});
+
+// Seleciona o elemento de música
+const backgroundMusic = document.getElementById("backgroundMusic");
+
+// Função para alternar a música
+function toggleMusic() {
+    const musicSetting = document.getElementById("music").value;
+
+    if (musicSetting === "on") {
+        backgroundMusic.play();
+    } else {
+        backgroundMusic.pause();
+        backgroundMusic.currentTime = 0; // Reinicia a música
+    }
+}
