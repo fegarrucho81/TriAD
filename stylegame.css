@@ -379,3 +379,17 @@ body {
     background-color: #007bff; /* Adiciona um fundo translúcido */
     border-radius: 50%; /* Deixa o botão arredondado ao passar o mouse */
 }
+
+.top-bar {
+    display: flex;
+    align-items: center;
+    padding-top: 30px; /* Define o espaçamento superior */
+}
+
+.top-bar .home-logo {
+    margin-top: 20px; /* Ajuste o valor conforme necessário */
+}
+
+.top-bar-buttons {
+    margin-top: 20px; /* Ajuste conforme necessário */
+}
