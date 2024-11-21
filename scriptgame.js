@@ -18,6 +18,13 @@ let currentGroup = 0;
 let attemptCount = 0; // Contador de tentativas
 let maxAttempts = 5;  // Limite de tentativas
 
+window.addEventListener('DOMContentLoaded', (event) => {
+    // Esconde a tela de compartilhamento e o overlay quando a página é carregada
+    document.getElementById('shareMessage').style.display = 'none';
+    document.getElementById('shareOverlay').style.display = 'none';
+});
+
+
 function selectItem(element) {
     const item = element.querySelector('.board-item');
     if (item.classList.contains('selected')) {
@@ -149,6 +156,10 @@ function resetGame() {
     const overlay = document.getElementById('overlay');
     overlay.style.display = 'none'; // Oculta o fundo escurecido
 
+    // Adicione a linha abaixo para esconder a mensagem de compartilhamento e o overlay
+    document.getElementById('shareMessage').style.display = 'none';
+    document.getElementById('shareOverlay').style.display = 'none';
+
     // Restante do código de reset...
     clearInterval(timerInterval);
     startTimer();
@@ -166,9 +177,6 @@ function resetGame() {
 
     document.querySelector('.game-wrapper').style.display = 'block';
 }
-
-
-
 
 
 /*
