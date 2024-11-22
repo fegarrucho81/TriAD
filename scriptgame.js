@@ -5,7 +5,7 @@ let correctGroups = [
         description: 'Palavras que expressam amor'
     },
     {
-        words: ['adereço', 'ornamento', 'mestre'],
+        words: ['adereço', 'ornamento', 'arranjo'],
         description: 'Termos relacionados a decoração'
     },
     {
