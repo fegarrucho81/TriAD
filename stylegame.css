@@ -133,7 +133,7 @@ body {
 }
 
 .board-item.correct.yellow {
-    background-color: #fdff00;
+    background-color: #c8c102;
 }
 
 .correct-message {
@@ -281,7 +281,7 @@ body {
 }
 
 .group3 { 
-    background-color: #fbd752; /* Amarelo */ 
+    background-color: #c8c102; /* Amarelo */ 
 }
 
 .result-buttons {
