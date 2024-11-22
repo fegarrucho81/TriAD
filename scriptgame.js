@@ -15,19 +15,20 @@ let correctGroups = [
 ];
 
 let newCorrectGroups = [
-    {
-        words: ['livro', 'autor', 'capítulo'],
-        description: 'Termos relacionados a livros'
-    },
-    {
-        words: ['sol', 'lua', 'estrela'],
-        description: 'Objetos do céu'
-    },
-    {
-        words: ['carro', 'moto', 'bicicleta'],
-        description: 'Meios de transporte'
-    }
+    { words: ['livro', 'autor', 'capítulo'], description: 'Termos relacionados a livros' },
+    { words: ['sol', 'lua', 'estrela'], description: 'Objetos do céu' },
+    { words: ['carro', 'moto', 'bicicleta'], description: 'Meios de transporte' },
+    { words: ['cão', 'gato', 'pássaro'], description: 'Animais domésticos' },
+    { words: ['mesa', 'cadeira', 'sofá'], description: 'Móveis da casa' },
+    { words: ['arroz', 'feijão', 'batata'], description: 'Alimentos básicos' },
+    { words: ['vermelho', 'azul', 'amarelo'], description: 'Cores primárias' },
+    { words: ['Brasil', 'Argentina', 'Chile'], description: 'Países da América do Sul' },
+    { words: ['violinista', 'baterista', 'pianista'], description: 'Profissões musicais' },
+    { words: ['medicamento', 'vacina', 'soro'], description: 'Termos da área da saúde' },
+    { words: ['nuvem', 'chuva', 'vento'], description: 'Elementos do clima' },
+    { words: ['papel', 'caneta', 'borracha'], description: 'Materiais de papelaria' }
 ];
+
 
 
 let currentGroup = 0;
@@ -220,7 +221,7 @@ function shuffleArray(array) {
 function resetGame() {
     const overlay = document.getElementById('overlay');
     const resultCard = document.getElementById('resultCard');
-    
+
     // Esconde a tela de derrota e o fundo escurecido
     overlay.style.display = 'none';
     resultCard.style.display = 'none';
@@ -249,10 +250,12 @@ function resetGame() {
     updateBoard();
 }
 
+
 function selectRandomGroups(allGroups, numberOfGroups) {
     const shuffledGroups = shuffleArray([...allGroups]); // Embaralha os grupos
     return shuffledGroups.slice(0, numberOfGroups); // Retorna o número desejado de grupos
 }
+
 
 // Função para embaralhar um array
 function shuffleArray(array) {
@@ -283,6 +286,7 @@ function updateBoard() {
         boardWrapper.appendChild(boardItemWrapper);
     });
 }
+
 
 // ID do elemento de áudio
 const audioElement = document.getElementById('backgroundMusic');
