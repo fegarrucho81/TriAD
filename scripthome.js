@@ -33,27 +33,33 @@ function changeLanguage() {
     if (language === 'en') {
         // Traduz o texto geral
         document.getElementById('homeText').innerText = "Form 3 groups of 3 words that have something in common";
-        document.getElementById('playButton').innerText = "Play";
-        document.getElementById('configButton').innerText = "Settings";
-        document.getElementById('feedbackButton').innerText = "Feedback";
-        document.getElementById('aboutButton').innerText = "About";
+        if (document.getElementById('playButton')) document.getElementById('playButton').innerText = "Play";
+        if (document.getElementById('configButton')) document.getElementById('configButton').innerText = "Settings";
+        if (document.getElementById('feedbackButton')) document.getElementById('feedbackButton').innerText = "Feedback";
+        if (document.getElementById('aboutButton')) document.getElementById('aboutButton').innerText = "About";
 
         // Traduz o menu de configurações
-        document.getElementById('configTitle').innerText = "Settings";
-        document.getElementById('languageLabel').innerText = "Language:";
-        document.getElementById('musicLabel').innerText = "Music:";
-        document.getElementById('closeConfigButton').innerText = "Close";
+        if (document.getElementById('configTitle')) document.getElementById('configTitle').innerText = "Settings";
+        if (document.getElementById('languageLabel')) document.getElementById('languageLabel').innerText = "Language:";
+        if (document.getElementById('musicLabel')) document.getElementById('musicLabel').innerText = "Music:";
+        if (document.getElementById('closeConfigButton')) document.getElementById('closeConfigButton').innerText = "Close";
 
         // Traduz o menu de "Sobre"
-        document.getElementById('aboutTitle').innerText = "About";
-        document.getElementById('aboutText').innerText = "Inspired by the BBC TV show Only Connect's Connecting Wall game.";
-        document.getElementById('closeAboutButton').innerText = "Close";
+        if (document.getElementById('aboutTitle')) document.getElementById('aboutTitle').innerText = "About";
+        if (document.getElementById('aboutText')) document.getElementById('aboutText').innerText = "Inspired by the BBC TV show Only Connect's Connecting Wall game.";
+        if (document.getElementById('closeAboutButton')) document.getElementById('closeAboutButton').innerText = "Close";
 
         // Traduz opções do dropdown
-        document.getElementById('language').options[0].text = "Portuguese";
-        document.getElementById('language').options[1].text = "English";
-        document.getElementById('music').options[0].text = "Enabled";
-        document.getElementById('music').options[1].text = "Disabled";
+        const languageSelect = document.getElementById('language');
+        if (languageSelect) {
+            languageSelect.options[0].text = "Portuguese";
+            languageSelect.options[1].text = "English";
+        }
+        const musicSelect = document.getElementById('music');
+        if (musicSelect) {
+            musicSelect.options[0].text = "Enabled";
+            musicSelect.options[1].text = "Disabled";
+        }
 
     } else {
         // Volta ao texto em português
@@ -92,6 +98,7 @@ function toggleAboutCard() {
         aboutCard.style.display = 'none';
     }
 }
+
 
 // ID do elemento de áudio
 const audioElement = document.getElementById('backgroundMusic');
