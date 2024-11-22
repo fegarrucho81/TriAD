@@ -14,6 +14,22 @@ let correctGroups = [
     }
 ];
 
+let newCorrectGroups = [
+    {
+        words: ['livro', 'autor', 'capítulo'],
+        description: 'Termos relacionados a livros'
+    },
+    {
+        words: ['sol', 'lua', 'estrela'],
+        description: 'Objetos do céu'
+    },
+    {
+        words: ['carro', 'moto', 'bicicleta'],
+        description: 'Meios de transporte'
+    }
+];
+
+
 let currentGroup = 0;
 let attemptCount = 0; // Contador de tentativas
 let maxAttempts = 5;  // Limite de tentativas
@@ -191,6 +207,16 @@ function toggleHelpCard() {
 }
 
 
+// Função para embaralhar um array de palavras
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1)); // Gera um índice aleatório
+        [array[i], array[j]] = [array[j], array[i]]; // Troca os elementos
+    }
+}
+
+
+
 function resetGame() {
     const overlay = document.getElementById('overlay');
     const resultCard = document.getElementById('resultCard');
@@ -199,7 +225,6 @@ function resetGame() {
     overlay.style.display = 'none';
     resultCard.style.display = 'none';
 
-    // Adicione a linha abaixo para esconder a mensagem de compartilhamento e o overlay
     document.getElementById('shareMessage').style.display = 'none';
     document.getElementById('shareOverlay').style.display = 'none';
 
@@ -217,7 +242,46 @@ function resetGame() {
     const boardItems = document.querySelectorAll('.board-item');
     boardItems.forEach(item => item.classList.remove('correct', 'red', 'blue', 'yellow'));
 
-    document.querySelector('.game-wrapper').style.display = 'block';
+    // Escolher novos grupos aleatórios
+    correctGroups = selectRandomGroups(newCorrectGroups, 3); // Escolhe 3 grupos aleatórios
+
+    // Atualiza o tabuleiro com palavras embaralhadas
+    updateBoard();
+}
+
+function selectRandomGroups(allGroups, numberOfGroups) {
+    const shuffledGroups = shuffleArray([...allGroups]); // Embaralha os grupos
+    return shuffledGroups.slice(0, numberOfGroups); // Retorna o número desejado de grupos
+}
+
+// Função para embaralhar um array
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function updateBoard() {
+    const boardWrapper = document.querySelector('.board-wrapper');
+    boardWrapper.innerHTML = ''; // Limpa o conteúdo atual do tabuleiro
+
+    // Gera as novas palavras, embaralha e as coloca no tabuleiro
+    const allWords = shuffleArray(correctGroups.flatMap(group => group.words));
+    allWords.forEach(word => {
+        const boardItemWrapper = document.createElement('div');
+        boardItemWrapper.classList.add('board-item-wrapper');
+        boardItemWrapper.setAttribute('tabindex', '0');
+        boardItemWrapper.setAttribute('onclick', 'selectItem(this)');
+        
+        const boardItem = document.createElement('div');
+        boardItem.classList.add('board-item');
+        boardItem.textContent = word;
+        
+        boardItemWrapper.appendChild(boardItem);
+        boardWrapper.appendChild(boardItemWrapper);
+    });
 }
 
 // ID do elemento de áudio
@@ -306,7 +370,7 @@ let startTime; // Para armazenar o tempo de início
 let timerInterval; // Para armazenar o intervalo do timer
 
 function startTimer() {
-    startTime = Date.now(); // Captura o tempo de início
+    startTime = Date.now(); // Captura o tempo  início
     timerInterval = setInterval(updateTimer, 1000); // Atualiza a cada segundo
 }
 
