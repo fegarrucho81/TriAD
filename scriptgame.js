@@ -225,25 +225,67 @@ const audioElement = document.getElementById('backgroundMusic');
 
 // Função para iniciar a música
 function startMusic() {
-    const savedTime = localStorage.getItem('musicTime') || 0; // Recupera o tempo salvo
+    let musicState = localStorage.getItem('musicState');
+
+    // Define como "off" se for a primeira vez que o usuário acessa
+    if (!musicState) {
+        musicState = "off";
+        localStorage.setItem('musicState', musicState); // Salva o estado padrão
+    }
+
+    const savedTime = localStorage.getItem('musicTime') || 0; // Tempo salvo no localStorage
+
     audioElement.currentTime = savedTime; // Define o tempo inicial
-    audioElement.play().catch(console.error); // Tenta iniciar a reprodução
+
+    if (musicState === "on") {
+        const playPromise = audioElement.play(); // Tenta iniciar a reprodução
+
+        if (playPromise !== undefined) {
+            playPromise.catch(() => {
+                console.warn('Reprodução automática bloqueada. O usuário precisa interagir com a página.');
+            });
+        }
+    }
 }
 
-// Função para pausar e salvar o tempo atual
+// Função para alternar o estado da música
+function toggleMusic() {
+    const musicSetting = document.getElementById("music").value; // Valor atual do select
+    localStorage.setItem('musicState', musicSetting); // Salva o estado no localStorage
+
+    if (musicSetting === "on") {
+        audioElement.play().catch(console.error); // Reproduz novamente se permitido
+    } else {
+        audioElement.pause();
+        audioElement.currentTime = 0; // Reinicia a música
+    }
+}
+
+// Função para atualizar o estado do select com base no localStorage
+function updateMusicSelect() {
+    const musicState = localStorage.getItem('musicState') || "off"; // Recupera o estado salvo (padrão "off")
+    document.getElementById("music").value = musicState; // Atualiza o select
+}
+
+// Função para salvar o tempo da música ao descarregar a página
 function saveMusicTime() {
     localStorage.setItem('musicTime', audioElement.currentTime); // Salva o tempo atual
 }
 
 // Inicia a música ao carregar a página
 document.addEventListener('DOMContentLoaded', () => {
-    startMusic();
+    startMusic(); // Inicia a música com base no estado salvo
+    if (document.getElementById("music")) {
+        updateMusicSelect(); // Atualiza o select se existir
+    }
 });
 
 // Salva o tempo quando a página é descarregada
 window.addEventListener('beforeunload', () => {
     saveMusicTime();
 });
+
+
 
 
 /*
@@ -282,4 +324,3 @@ function updateTimer() {
 window.onload = function() {
     startTimer(); // Inicia o timer ao carregar a página
 };
-
