@@ -27,7 +27,7 @@ Acesse a versão online do jogo: [TriAD](https://triad-game.netlify.app/)
 
 ## Créditos
 - Felipe de Oliveira Garrucho  
-- Igor Cordeiro  
+- Igor da Silva Cordeiro
 - Weslley da Costa Sebastião  
 
 ---
@@ -58,6 +58,7 @@ Play online here: [TriAD](https://triad-game.netlify.app/)
 - Netlify for deployment.
 
 ## Credits
+
 - Felipe de Oliveira Garrucho  
-- Igor Cordeiro  
+- Igor da Silva Cordeiro
 - Weslley da Costa Sebastião  
