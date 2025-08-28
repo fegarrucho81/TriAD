@@ -26,10 +26,8 @@ Acesse a versão online do jogo: [TriAD](https://triad-game.netlify.app/)
 - Netlify para o deploy.
 
 ## Créditos
-- Bianca Trindade de Sá  
 - Felipe de Oliveira Garrucho  
 - Igor Cordeiro  
-- João Victor Alves  
 - Weslley da Costa Sebastião  
 
 ---
